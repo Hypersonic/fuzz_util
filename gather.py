@@ -31,7 +31,7 @@ for id,fname in enumerate(glob("%s/*/crashes/*"%sync_dir)):
             of.write(inf.read())
 
 # minimize everything
-dirs = glob("%s/*"%gather_dir):
+dirs = glob("%s/*"%gather_dir)
 for i, ifname in enumerate(dirs):
     ofname = fixed_dir + '/' + '/'.join(ifname.split('/')[1:])
     print "Simplifying %s (%d/%d)"%(ifname, i, len(dirs))
