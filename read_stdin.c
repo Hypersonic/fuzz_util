@@ -1,3 +1,4 @@
+#include "read_stdin.h"
 #include <stdio.h>
 
 char *read_stdin()
