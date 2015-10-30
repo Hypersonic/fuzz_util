@@ -11,10 +11,3 @@ char *read_stdin()
     }
     return contents.c_str();
 }
-
-int main()
-{
-    std::string input = read_stdin();
-    std::cout << input << std::endl;
-    return 0;
-}
