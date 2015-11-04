@@ -1,12 +1,12 @@
 #!/usr/bin/fish
 
 # fish find_errors.fish [command that takes input file name as arg]
-# should be run in the crashes directory
+# should be run in a directory that contains a crashes directory somewhere inside it (or recrusively buried inside it)
 # logs output to out.txt, also writes unique errors to stdout as well as appending them to out.txt
 
 rm out.txt;
 touch out.txt;
-for i in id*;
+for i in **/crashes/id*;
   echo -e "backtrace\nquit"               \
   | gdb --quiet -ex "run" --args $argv $i \
   | tee -a out.txt;
