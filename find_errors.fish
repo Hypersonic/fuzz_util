@@ -1,6 +1,7 @@
 #!/usr/bin/fish
 
 # fish find_errors.fish [command that takes input file name as arg]
+# should be run in the crashes directory
 # logs output to out.txt, also writes unique errors to stdout as well as appending them to out.txt
 
 rm out.txt;
