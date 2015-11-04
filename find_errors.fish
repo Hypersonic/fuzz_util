@@ -6,7 +6,7 @@
 
 echo "" > $argv[1];
 for i in **/crashes/id*;
-  echo -e "backtrace\nquit"                                 \
-  | gdb --quiet -ex "run" --args $argv[2..(count $argv)] $i \
+  echo -e "backtrace\nquit"                                                     \
+  | fish -c "gdb --quiet -ex 'run' --args "(echo $argv[2] | sed "s/@@/"$i"/g")  \
   | tee -a $argv[1];
 end | grep --text "^(gdb) #0" | sort | uniq | tee -a $argv[1]
