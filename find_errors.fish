@@ -1,12 +1,16 @@
 #!/usr/bin/fish
 
-# fish find_errors.fish [command that takes input file name as arg]
-# logs output to out.txt, also writes unique errors to stdout as well as appending them to out.txt
+# How to:
+# fish find_errors.fish [output] [string of a command to run the program, using @@ for the file name]
+# should be run in a directory that contains a crashes directory somewhere inside it (or recrusively buried inside it)
+# logs errors to [output], also writes unique errors to stdout as well as appending them to the output file
 
-rm out.txt;
-touch out.txt;
-for i in id*;
-  echo -e "backtrace\nquit"               \
-  | gdb --quiet -ex "run" --args $argv $i \
-  | tee -a out.txt;
-end | grep --text "^(gdb) #0" | sort | uniq | tee -a out.txt
+# Example:
+# ./errors.fish out.txt "~/my_program @@"
+
+echo "" > $argv[1];
+for i in **/crashes/id*;
+  echo -e "backtrace\nquit"                                                     \
+  | fish -c "gdb --quiet -ex 'run' --args "(echo $argv[2] | sed "s/@@/"$i"/g")  \
+  | tee -a $argv[1];
+end | grep --text "^(gdb) #0" | sort | uniq | tee -a $argv[1]
